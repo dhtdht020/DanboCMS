@@ -1,0 +1,25 @@
+{% if current_user.is_authenticated %}
+    <nav class="navbar is-dark">
+        <div class="navbar-burger" data-target="navbaradmin">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div id="navbaradmin" class="navbar-menu">
+            <div class="navbar-start">
+                <div class="navbar-item">
+                    <span>Danbo CMS</span>
+                </div>
+                <a class="navbar-item" href="{{ url_for('admin.home') }}">
+                    Go to Admin
+                </a>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <span>Logged in as {{ current_user.username }}</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% endif %}

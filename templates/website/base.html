@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Website</title>
+    <link rel="stylesheet" href="/static/bulma/css/bulma.min.css">
+</head>
+<body>
+{% include 'website/includes/admin-navbar.html' %}
+{% include 'website/includes/navbar.html' %}
+<section class="section">
+    <div class="container">
+        {{ content | safe }}
+    </div>
+</section>
+<script src="/static/BulmaJS/dist/bulma.js"></script>
+</body>
+</html>
