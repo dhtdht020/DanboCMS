@@ -5,10 +5,12 @@ import config
 from models import UserModel, db, PageModel, NavbarItemModel, SettingsModel
 
 from admin.pages import pages
+from admin.navbar_items import navbar_items
 
 admin = Blueprint('admin', __name__, template_folder='templates', url_prefix='/admin')
 
 admin.register_blueprint(pages)
+admin.register_blueprint(navbar_items)
 
 
 @admin.route('/')
@@ -44,43 +46,6 @@ def settings():
                 db.session.commit()
         return redirect(url_for('admin.settings'))
     return render_template('admin/settings.html', pages=PageModel.query.all(), settings=settings)
-
-
-@admin.route('/navbar_items/edit/<id>', methods=['GET', 'POST', 'DELETE'])
-@login_required
-def edit_navbar_item(id):
-    if id == "new":
-        # find the last item in the list and use its position_index + 1
-        last_item = NavbarItemModel.query.order_by(NavbarItemModel.position_index.desc()).first()
-        if last_item:
-            position_index = last_item.position_index + 1
-        else:
-            position_index = 1
-        # create a new item
-        item = NavbarItemModel(position_index=position_index, title="New Item")
-        db.session.add(item)
-        db.session.commit()
-        return redirect(url_for('admin.edit_navbar_item', id=item.id))
-    else:
-        item = NavbarItemModel.query.filter_by(id=id).first()
-        if item is None:
-            return redirect(url_for('admin.navbar_items'))
-        if request.method == 'POST':
-            item.title = request.form['title']
-            item.custom_url = request.form['custom_url']
-            if 'custom_url_enabled' in request.form:
-                item.custom_url_enabled = request.form['custom_url_enabled'] == 'on'
-            else:
-                item.custom_url_enabled = False
-            item.position_index = request.form['index']
-            item.page_id = request.form['page_id']
-            db.session.commit()
-            return redirect(url_for('admin.navbar_items'))
-        if request.method == 'DELETE':
-            db.session.delete(item)
-            db.session.commit()
-            return redirect(url_for('admin.navbar_items'))
-    return render_template('admin/edit_navbar_item.html', item=item, pages=PageModel.query.all())
 
 
 @admin.route('/login', methods=['POST', 'GET'])

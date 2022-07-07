@@ -24,6 +24,7 @@ def edit(id):
     else:
         page = PageModel.query.filter_by(id=id).first()
         if page is None:
+            flash('Page not found!', 'danger')
             return redirect(url_for('admin.pages'))
         if request.method == 'POST':
             page.name = request.form['name']
