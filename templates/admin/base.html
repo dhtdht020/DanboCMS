@@ -33,17 +33,19 @@
             <div class="content-wrapper">
                 <!-- Container-fluid -->
                 <div class="container-fluid">
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                        {% if messages %}
-                            {% for category, message in messages %}
-                                <div class="alert alert-{{ category }}" role="alert">
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-                    {% block content %}
-                    {% endblock %}
+                    <div class="content">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }}" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        {% block content %}
+                        {% endblock %}
+                    </div>
                 </div>
             </div>
         </div>
