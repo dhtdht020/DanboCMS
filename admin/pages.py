@@ -17,7 +17,7 @@ def edit(id):
         # random number to make sure the url is unique
         number = random.randint(1, 10000)
         page = PageModel(name=f'New Page #{number}', url=f'newpage{number}',
-                         content='<h1>I am new page</h1>', include_blog=False)
+                         content='<h1>I am new page</h1>')
         db.session.add(page)
         db.session.commit()
         return redirect(url_for('admin.pages.edit', id=page.id))

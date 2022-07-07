@@ -26,7 +26,7 @@ def create_table():
 
     # add an home page entry to pages table
     if PageModel.query.filter_by(name='Home Page').first() is None:
-        page = PageModel(name='Home Page', url='', include_blog=True,
+        page = PageModel(name='Home Page', url='',
                          content='<h1 class="title">Welcome to the website!</h1>'
                                  '<p>This is the home page.</p>'
                                  '<a href="/admin/pages">Manage pages</a>')
