@@ -5,7 +5,7 @@
         <h1 class="content-title font-size-22"> <!-- font-size-22 = font-size: 2.2rem (22px) -->
             Pages
         </h1>
-        <a href="{{ url_for('admin.edit_page', id="new") }}" class="btn btn-success" type="button">Create New Page</a>
+        <a href="{{ url_for('admin.pages.edit', id="new") }}" class="btn btn-success" type="button">Create New Page</a>
         <br><br>
         <table class="table table-bordered">
             <thead>
@@ -27,8 +27,8 @@
                     <td class="text-right">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a href="{{ url_for("website.page", url=page.url) }}" class="btn" type="button">View</a>
-                            <a href="{{ url_for("admin.edit_page", id=page.id) }}" class="btn" type="button">Edit</a>
-                            <button class="btn btn-danger" type="button">Delete</button>
+                            <a href="{{ url_for("admin.pages.edit", id=page.id) }}" class="btn" type="button">Edit</a>
+                            <a href="{{ url_for("admin.pages.delete", id=page.id) }}" class="btn btn-danger" type="button">Delete</a>
                         </div>
                     </td>
                 </tr>

@@ -1,12 +1,14 @@
-import random
-
-from flask import Blueprint, request, redirect, render_template, url_for
+from flask import Blueprint, request, redirect, render_template, url_for, flash
 from flask_login import current_user, login_user, login_required
 
 import config
 from models import UserModel, db, PageModel, NavbarItemModel, SettingsModel
 
+from admin.pages import pages
+
 admin = Blueprint('admin', __name__, template_folder='templates', url_prefix='/admin')
+
+admin.register_blueprint(pages)
 
 
 @admin.route('/')
@@ -79,36 +81,6 @@ def edit_navbar_item(id):
             db.session.commit()
             return redirect(url_for('admin.navbar_items'))
     return render_template('admin/edit_navbar_item.html', item=item, pages=PageModel.query.all())
-
-
-@admin.route('/pages/edit/<id>', methods=['GET', 'POST', 'DELETE'])
-@login_required
-def edit_page(id):
-    if id == "new":
-        # create a new page
-        # random number to make sure the url is unique
-        number = random.randint(1, 10000)
-        page = PageModel(name=f'New Page #{number}', url=f'newpage{number}',
-                         content='<h1>I am new page</h1>', include_blog=False)
-        db.session.add(page)
-        db.session.commit()
-        return redirect(url_for('admin.edit_page', id=page.id))
-    else:
-        page = PageModel.query.filter_by(id=id).first()
-        if page is None:
-            return redirect(url_for('admin.pages'))
-        if request.method == 'POST':
-            page.name = request.form['name']
-            page.url = request.form['url']
-            page.content = request.form['content']
-            page.include_blog = request.form['include_blog'] == 'on'
-            db.session.commit()
-            return redirect(url_for('admin.pages'))
-        if request.method == 'DELETE':
-            db.session.delete(page)
-            db.session.commit()
-            return redirect(url_for('admin.pages'))
-    return render_template('admin/edit_page.html', page=page)
 
 
 @admin.route('/login', methods=['POST', 'GET'])

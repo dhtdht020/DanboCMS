@@ -5,7 +5,7 @@
             Edit {{ page.name }}
         </h1>
         <div class="content-body">
-            <form action="{{ url_for('admin.edit_page', id=page.id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url_for('admin.pages.edit', id=page.id) }}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ page.name }}">
