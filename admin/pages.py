@@ -30,7 +30,6 @@ def edit(id):
             page.name = request.form['name']
             page.url = request.form['url']
             page.content = request.form['content']
-            page.include_blog = request.form['include_blog'] == 'on'
             db.session.commit()
             flash('Page successfully updated!', 'success')
             return redirect(url_for('admin.pages'))

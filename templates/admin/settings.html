@@ -14,6 +14,15 @@
         <form action="{{ url_for('admin.settings') }}" method="post" enctype="multipart/form-data">
             {{ text_setting("Website Name", "website_name") }}
             <div class="form-group">
+                <label for="blog_page">Blog Page</label>
+                <select class="form-control" id="blog_page" name="blog_page">
+                    {% for page in pages %}
+                        <option value="{{ page.id }}"
+                                {% if page.id == settings.blog_page | int %}selected{% endif %}>{{ page.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="home_page">Home Page</label>
                 <select class="form-control" id="home_page" name="home_page">
                     {% for page in pages %}

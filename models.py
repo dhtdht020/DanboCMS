@@ -39,7 +39,6 @@ class PageModel(UserMixin, db.Model):
     content = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
-    include_blog = db.Column(db.Boolean, default=False)
 
 
 class NavbarItemModel(UserMixin, db.Model):

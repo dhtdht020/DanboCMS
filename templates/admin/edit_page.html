@@ -17,13 +17,6 @@
                 <label for="content">Content</label>
                 <textarea class="form-control" id="content" name="content" rows="10">{{ page.content }}</textarea>
             </div>
-            <div class="form-group">
-                <label for="include_blog">Blog</label>
-                <select class="form-control" id="include_blog" name="include_blog">
-                    <option value="off"{% if page.include_blog == False %} selected{% endif %}>Disabled</option>
-                    <option value="on"{% if page.include_blog == True %} selected{% endif %}>Enabled</option>
-                </select>
-            </div>
             <input class="btn btn-primary" type="submit" value="Save">
             <div id="editor">{{ page.content | safe }}</div>
         </form>

@@ -42,6 +42,10 @@ def create_table():
         settings = SettingsModel(key='home_page', value='1')
         db.session.add(settings)
         db.session.commit()
+    if SettingsModel.query.filter_by(key='blog_page').first() is None:
+        settings = SettingsModel(key='blog_page', value='1')
+        db.session.add(settings)
+        db.session.commit()
 
 
 if __name__ == '__main__':

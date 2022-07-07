@@ -11,7 +11,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>URL</th>
-            <th>Include Blog</th>
+            <th>Last Updated</th>
             <th></th>
         </tr>
         </thead>
@@ -21,7 +21,7 @@
                 <th>{{ page.id }}</th>
                 <td>{{ page.name }}</td>
                 <td>/{{ page.url }}</td>
-                <td>{{ page.include_blog }}</td>
+                <td>{{ page.updated_at }}</td>
                 <td class="text-right">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a href="{{ url_for("website.page", url=page.url) }}" class="btn" type="button">View</a>
