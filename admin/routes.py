@@ -42,8 +42,11 @@ def settings():
         for key in settings:
             if key in request.form:
                 setting = SettingsModel.query.filter_by(key=key).first()
-                setting.value = request.form[key]
-                db.session.commit()
+                # check if changed
+                if setting.value != request.form[key]:
+                    setting.value = request.form[key]
+                    db.session.commit()
+                    flash(f'Successfully updated setting \"{setting.key}\"', 'success')
         return redirect(url_for('admin.settings'))
     return render_template('admin/settings.html', pages=PageModel.query.all(), settings=settings)
 
