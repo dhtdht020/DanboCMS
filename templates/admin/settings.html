@@ -31,6 +31,17 @@
                     {% endfor %}
                 </select>
             </div>
+            <div class="form-group">
+                <label for="display_navigation_bar">Display Navigation Bar</label>
+                <select class="form-control" id="display_navigation_bar" name="display_navigation_bar">
+                    <option value="true" {% if settings.display_navigation_bar == "true" %}selected{% endif %}>
+                        True
+                    </option>
+                    <option value="false" {% if settings.display_navigation_bar == "false" %}selected{% endif %}>
+                        False
+                    </option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>

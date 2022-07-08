@@ -8,7 +8,9 @@
 </head>
 <body>
 {% include 'website/includes/admin-navbar.html' %}
+{% if settings["display_navigation_bar"] == "true" %}
 {% include 'website/includes/navbar.html' %}
+{% endif %}
 <section class="section">
     <div class="container">
         {{ content | safe }}

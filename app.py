@@ -46,6 +46,10 @@ def create_table():
         settings = SettingsModel(key='blog_page', value='1')
         db.session.add(settings)
         db.session.commit()
+    if SettingsModel.query.filter_by(key='display_navigation_bar').first() is None:
+        settings = SettingsModel(key='display_navigation_bar', value='true')
+        db.session.add(settings)
+        db.session.commit()
 
 
 if __name__ == '__main__':
