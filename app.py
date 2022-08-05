@@ -1,13 +1,15 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from models import db, login, PageModel, SettingsModel
 import config
 
+from setup.routes import setup
 from admin.routes import admin
 from website.routes import website
 
 app = Flask(__name__)
 
 # Register blueprints
+app.register_blueprint(setup)
 app.register_blueprint(admin)
 app.register_blueprint(website)
 
